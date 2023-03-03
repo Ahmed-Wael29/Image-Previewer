@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Image-previewer</title>
+  </head>
+  <style>
+    .container {
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* Small Screens */
+    @media (min-width: 768px) {
+      .container {
+        width: 750px;
+      }
+    }
+    /* Medium Screens */
+    @media (min-width: 992px) {
+      .container {
+        width: 970px;
+      }
+    }
+    /* Large Screens */
+    @media (min-width: 1200px) {
+      .container {
+        width: 1170px;
+      }
+    }
+    body {
+      background-color: black;
+    }
+    div {
+      width: 600px;
+      text-align: center;
+      margin: 20px auto;
+      padding: 10px;
+    }
+    img {
+      width: 400px;
+      height: 400px;
+      border: 8px solid orangered;
+    }
+    input {
+      width: 100px;
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    input:focus {
+      background-color: orangered;
+      color: white;
+    }
+    span {
+      display: block;
+      border: 2px solid goldenrod;
+      font-size: 22px;
+      margin: 25px auto;
+      font-weight: bold;
+      text-align: center;
+      width: fit-content;
+      padding: 6px 20px;
+      background-color: #eee;
+    }
+    span::before {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 2px;
+      background-color: goldenrod;
+      top: 74px;
+      left: 0;
+      z-index: -1;
+    }
+    @media (max-width: 767px) {
+      span::before {
+        display: none;
+      }
+    }
+    #play {
+      background-color: green;
+      color: white;
+    }
+    #stop {
+      background-color: red;
+      color: white;
+    }
+    #show {
+      background-color: goldenrod;
+      color: white;
+      font-weight: bold;
+    }
+  </style>
+  <body>
+    <div class="contaier">
+      <span>Slide Show Game</span>
+      <div class="image">
+        <img src="pic1.jpg" id="myimg" />
+      </div>
+      <div class="controlswrapper">
+        <input id="show" type="button" value="<" onclick="nextshow();" />
+        <input id="play" type="button" value="Play" onclick="startshow();" />
+        <input id="stop" type="button" value="Stop" onclick="stopshow();" />
+        <input id="show" type="button" value=">" onclick="prevshow();" />
+      </div>
+    </div>
+    <script>
+      var i = 0,
+        t;
+      var imagearry = [
+        "pic1.jpg",
+        "pic2.jpg",
+        "pic3.jpg",
+        "pic4.jpg",
+        "pic5.jpg",
+        "pic6.jpg",
+        "pic7.jpg",
+        "pic8.jpg",
+        "pic9.jpg",
+        "pic10.jpg",
+      ];
+      function startshow() {
+        if (!t) t = setInterval("nextshow()", 1500);
+      }
+      function nextshow() {
+        i++;
+        if (i >= imagearry.length) i = 0;
+        myimg.src = imagearry[i];
+      }
+      function prevshow() {
+        i--;
+        if (i < 0) i = imagearry.length - 1;
+        myimg.src = imagearry[i];
+      }
+      function stopshow() {
+        clearInterval(t);
+        t = null;
+      }
+    </script>
+  </body>
+</html>
